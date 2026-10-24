@@ -2,7 +2,6 @@ import "dotenv/config";
 import { buildApp } from "./app.js";
 import { ActionpackdClient } from "./channels/whatsapp/client.js";
 import { WhatsAppAdapter } from "./channels/whatsapp/adapter.js";
-import { TelegramAdapter } from "./channels/telegram/adapter.js";
 import { ChannelRegistry } from "./channels/registry.js";
 import { loadConfig } from "./config.js";
 import { migrate, migrationsDir } from "./db/migrate.js";
@@ -32,7 +31,6 @@ const channels = new ChannelRegistry([
       baseUrl: config.ACTIONPACKD_BASE_URL,
     }),
   ),
-  new TelegramAdapter(),
 ]);
 
 const app = await buildApp({

@@ -1,6 +1,6 @@
 -- Students collected during cohort onboarding, plus the step they are on.
 -- phone is the sender number (WhatsApp) once we have it. channel_user_id is the
--- stable id on that channel (WhatsApp: the same digits; Telegram later: chat id).
+-- stable id on that channel (WhatsApp: the sender digits).
 
 CREATE OR REPLACE FUNCTION set_updated_at()
 RETURNS trigger
@@ -20,7 +20,7 @@ CREATE TABLE students (
   college TEXT,
   course TEXT CHECK (course IS NULL OR course IN ('fundamental', 'advanced')),
   batch TEXT,
-  channel TEXT NOT NULL CHECK (channel IN ('whatsapp', 'telegram')),
+  channel TEXT NOT NULL CHECK (channel IN ('whatsapp')),
   channel_user_id TEXT NOT NULL,
   current_step TEXT NOT NULL CHECK (current_step IN (
     'new',
@@ -78,7 +78,7 @@ ON CONFLICT (course, batch) DO NOTHING;
 -- sent, so a webhook retry cannot advance the student twice and can resend.
 CREATE TABLE processed_events (
   event_id TEXT PRIMARY KEY,
-  channel TEXT NOT NULL CHECK (channel IN ('whatsapp', 'telegram')),
+  channel TEXT NOT NULL CHECK (channel IN ('whatsapp')),
   status TEXT NOT NULL CHECK (status IN ('processing', 'processed')),
   replies JSONB NOT NULL DEFAULT '[]'::jsonb,
   created_at TIMESTAMPTZ NOT NULL DEFAULT now(),

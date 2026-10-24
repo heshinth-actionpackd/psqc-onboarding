@@ -2,7 +2,7 @@
 
 WhatsApp onboarding for a PSQC cohort. A student sends **Hi PSQC**, then the bot collects their name, email, and college (the phone number is the WhatsApp sender), asks them to pick **Fundamental** or **Advanced**, confirms a batch, saves the record, and sends the session details for that course and batch.
 
-Messaging goes through the [Actionpackd Messaging API](https://dev.actionpackd.com/docs). Telegram is not wired up. The conversation steps do not import WhatsApp types, so a second adapter can call the same `runTurn` later.
+Messaging goes through the [Actionpackd Messaging API](https://dev.actionpackd.com/docs). The conversation steps do not import WhatsApp types.
 
 This is a skeleton. Template names, the exact webhook JSON, and a few product choices are marked in the code and listed at the bottom.
 
@@ -31,7 +31,6 @@ src/config.ts                    env validation
 src/conversation/machine.ts      step transitions
 src/conversation/run-turn.ts     one inbound event, idempotent
 src/channels/whatsapp/           signature, parser, Actionpackd client, route
-src/channels/telegram/adapter.ts placeholder adapter
 src/db/                          pg pool, SQL migration runner, queries
 migrations/001_init.sql          students, course_batches, processed_events
 ```

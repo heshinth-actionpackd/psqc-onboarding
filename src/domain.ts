@@ -1,4 +1,4 @@
-export const CHANNELS = ["whatsapp", "telegram"] as const;
+export const CHANNELS = ["whatsapp"] as const;
 export type ChannelId = (typeof CHANNELS)[number];
 
 export const COURSES = ["fundamental", "advanced"] as const;
@@ -20,7 +20,7 @@ export type Reply =
   | { kind: "text"; body: string }
   | { kind: "template"; templateName: string; language: string; bodyParams?: string[] };
 
-/** Normalized inbound turn. WhatsApp and (later) Telegram both produce this. */
+/** Normalized inbound turn. */
 export interface InboundMessage {
   channel: ChannelId;
   eventId: string;
