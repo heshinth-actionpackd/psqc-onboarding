@@ -8,5 +8,5 @@
  * approved template; they are not sent on the API request.
  */
 export const TEMPLATE_NAMES = {
-  courseChoice: "TODO_psqc_course_choice",
+  courseChoice: "psqc_course_choice",
 } as const;
